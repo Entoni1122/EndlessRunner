@@ -8,4 +8,5 @@ public class EnemyMVM : MonoBehaviour
     {
         transform.Translate(new Vector3(0, 0, GlobalVariables.enemySpeed) * Time.deltaTime);
     }
+
 }
