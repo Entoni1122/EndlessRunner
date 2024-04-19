@@ -8,13 +8,18 @@ public class BulletMVM : MonoBehaviour
     Vector3 direction;
     [SerializeField] GameObject _particleEffectOnExplosion;
     [SerializeField] GameObject _particleEffectOnhit;
+
+    Rigidbody _rb;
+
     private void Start()
     {
+        _rb = GetComponent<Rigidbody>();
+
         Destroy(gameObject, 5);
     }
     void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        _rb.velocity = direction * speed * Time.deltaTime;
     }
     public void Init(Vector3 dir)
     {

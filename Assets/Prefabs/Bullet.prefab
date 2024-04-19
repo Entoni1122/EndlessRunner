@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af466c2e12722e408c94cfa3de739f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  _particleEffectOnExplosion: {fileID: 4179197960026752406, guid: 6efce37c336326446a81458e71887969,
+  speed: 1000
+  _particleEffectOnExplosion: {fileID: 4179197960026752406, guid: 9c5ed522712aa6b478c567456a2b1c2f,
     type: 3}
-  _particleEffectOnhit: {fileID: 4179197960026752406, guid: 6efce37c336326446a81458e71887969,
+  _particleEffectOnhit: {fileID: 4179197960026752406, guid: 9c5ed522712aa6b478c567456a2b1c2f,
     type: 3}
 --- !u!135 &2703890129002589327
 SphereCollider:
@@ -150,4 +150,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1

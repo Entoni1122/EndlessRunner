@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerShootingInput : MonoBehaviour
 {
-    [SerializeField] GameObject _bullet;
     [SerializeField] Transform _muzzle;
 
     [SerializeField] GameObject aimTarget;
+    [SerializeField] GameObject _particleEffectOnhit;
+    [SerializeField] TrailRenderer _trail;
+
+    public float bulletDMG;
     // Update is called once per frame
     void Update()
     {
@@ -21,17 +25,40 @@ public class PlayerShootingInput : MonoBehaviour
 
         if (Physics.Raycast(camRay, out raycastHit, 300))
         {
-            Vector3 dir = (raycastHit.point - _muzzle.position).normalized;
+            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return;
+            }
+            //Vector3 dir = (raycastHit.point - _muzzle.position).normalized;
             aimTarget.transform.position = raycastHit.point;
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Shoot(dir);
+                if (raycastHit.transform.gameObject.GetComponent<EnemyMVM>())
+                {
+                    raycastHit.transform.gameObject.GetComponent<EnemyMVM>().OnDMGTaken(bulletDMG);
+                }
+                TrailRenderer trail = Instantiate(_trail, _muzzle.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, raycastHit));
             }
         }
     }
-    void Shoot(Vector3 dir)
+
+    IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
-        GameObject bulletRef = Instantiate(_bullet, _muzzle.position, Quaternion.identity);
-        bulletRef.GetComponent<BulletMVM>().Init(dir);
+        float time = 0;
+        Vector3 startpos = trail.transform.position;
+
+        while (time < 1)
+        {
+            trail.transform.position = Vector3.Lerp(startpos, hit.point, time);
+
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+
+        trail.transform.position = hit.point;
+        Instantiate(_particleEffectOnhit, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(trail.gameObject, trail.time);
     }
+
 }

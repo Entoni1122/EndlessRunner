@@ -118,3 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b847f8654e5bd0469d2e1cd1742e98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onDeadParticle: {fileID: 917702640467007470, guid: 6f78d66a4684e37439fb9e7caadb0ee6,
+    type: 3}
+  maxHP: 0
