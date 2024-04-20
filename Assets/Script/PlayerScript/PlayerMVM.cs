@@ -14,8 +14,9 @@ public class PlayerMVM : MonoBehaviour
 
     float gravity = -9.81f;
     CharacterController _cc;
+    public Animator _anim;
     Vector3 direction;
-    Animator _anim;
+    [SerializeField]public bool jump => _anim.GetBool("Jump");
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
@@ -30,6 +31,8 @@ public class PlayerMVM : MonoBehaviour
         if (ISGROUNDED() && Velocity.y < 0)
         {
             Velocity.y = -1;
+            _anim.SetBool("Jump", false);
+
         }
 
         float x = Input.GetAxis("Horizontal");
@@ -37,22 +40,23 @@ public class PlayerMVM : MonoBehaviour
         {
             x = 0;
         }
+        direction.z = 1;
         direction.x = x;
-        direction.z = 0.5f;
+
+        _anim.SetFloat("Blend",x);
         _cc.Move(direction * mvmSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Space) && ISGROUNDED())
         {
             Velocity.y = jumpForce;
+            _anim.SetBool("Jump", true);
         }
+
+        Velocity.y += gravity * gravityMultiplier * Time.deltaTime;
+
+        _cc.Move(Velocity * Time.deltaTime);
     }
 
-    private void OnAnimatorMove()
-    {
-        Velocity = _anim.deltaPosition;
-        Velocity.y += gravity * gravityMultiplier * Time.deltaTime;
-        _cc.Move(Velocity);
-    }
 
     bool ISGROUNDED()
     {

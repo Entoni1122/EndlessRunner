@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CorridorManager : MonoBehaviour
 {
-    [SerializeField] GameObject NodeToSpawn;
     Vector3 positioToGo;
     [SerializeField] List<GameObject> nodeList;
     public void CreateNewNode()
