@@ -14,7 +14,7 @@ public class NodeLogic : MonoBehaviour
     }
     void Update()
     {
-        Vector3 dir = new Vector3(0,0,speed);
+        Vector3 dir = new Vector3(0,0,0);
         transform.Translate(dir * Time.deltaTime);
 
         if (Camera.main.transform.position.z > transform.position.z + magnitudeTollerance)
