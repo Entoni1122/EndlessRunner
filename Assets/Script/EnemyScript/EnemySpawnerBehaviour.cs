@@ -10,12 +10,12 @@ public class EnemySpawnerBehaviour : MonoBehaviour
 
     void Update()
     {
+        transform.position = new Vector3(2, 4, Camera.main.transform.position.y + 40);
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
             Instantiate(_enemy, transform.position, Quaternion.identity, transform);
             timer = spawnRate;
         }
-        transform.position = new Vector3(2, 0, Camera.main.transform.position.z + 40);
     }
 }
