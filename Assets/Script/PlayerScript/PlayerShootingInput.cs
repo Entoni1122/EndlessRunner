@@ -36,7 +36,6 @@ public class PlayerShootingInput : MonoBehaviour
                 {
                     return;
                 }
-                //Vector3 dir = (raycastHit.point - _muzzle.position).normalized;
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     if (raycastHit.transform.gameObject.GetComponent<EnemyMVM>())
@@ -49,6 +48,7 @@ public class PlayerShootingInput : MonoBehaviour
                 }
             }
         }
+        
     }
 
     IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
