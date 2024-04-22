@@ -12,5 +12,4 @@ public class PlayerCameraFollow : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position,_target.position,cameraSpeed * Time.deltaTime);
     }
-
 }
