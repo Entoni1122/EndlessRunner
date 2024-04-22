@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerShootingInput : MonoBehaviour
 {
@@ -15,12 +17,30 @@ public class PlayerShootingInput : MonoBehaviour
 
     public float fireRate;
     float timer;
+
+    [SerializeField] Animator _cc;
+    public Rig _rig;
+    bool CanShoot = true;
     // Update is called once per frame
     void Update()
     {
         ShootInput();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _cc.SetBool("Reload", true);
+            _rig.weight = 0;
+            CanShoot = false;
+        }
     }
 
+    public void OnAnimationEnd()
+    {
+        _cc.SetBool("Reload", false);
+        _rig.weight = 1;
+        CanShoot = true;
+        print("Reloading End");
+    }
     void ShootInput()
     {
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -30,7 +50,7 @@ public class PlayerShootingInput : MonoBehaviour
         {
             timer -= Time.deltaTime;
             aimTarget.transform.position = raycastHit.point;
-            if (timer <= 0)
+            if (timer <= 0 && CanShoot)
             {
                 if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
                 {

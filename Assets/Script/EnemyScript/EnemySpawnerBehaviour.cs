@@ -15,7 +15,7 @@ public class EnemySpawnerBehaviour : MonoBehaviour
         if (timer <= 0)
         {
             float randomX = Random.Range(-8,8);
-            float randomY = Random.Range(-1,0);
+            float randomY = Random.Range(-2,2);
 
             Vector3 enmeyPos = new Vector3 (randomX, randomY, 0);
 
