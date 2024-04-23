@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 
 public class PlayerShootingInput : MonoBehaviour
 {
@@ -45,14 +46,15 @@ public class PlayerShootingInput : MonoBehaviour
 
         if (Physics.Raycast(camRay, out raycastHit, 300))
         {
+            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return;
+            }
             timer -= Time.deltaTime;
             aimTarget.transform.position = raycastHit.point;
+            raycastHit.point += _weapon.SprayShootPoint();
             if (timer <= 0 && CanShoot)
             {
-                if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
-                {
-                    return;
-                }
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     if (raycastHit.transform.gameObject.GetComponent<EnemyMVM>())
@@ -62,10 +64,11 @@ public class PlayerShootingInput : MonoBehaviour
                     TrailRenderer trail = Instantiate(_trail, _muzzle.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, raycastHit));
                     timer = _weapon.FireRate;
+
+                    _cc.SetTrigger("Shoot");
                 }
             }
         }
-        
     }
 
     IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
@@ -82,8 +85,14 @@ public class PlayerShootingInput : MonoBehaviour
         }
 
         trail.transform.position = hit.point;
+        if (hit.transform.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+        {
+            Instantiate(_particleEffectOnhit, hit.point, Quaternion.LookRotation(hit.normal), hit.transform);
+            Destroy(trail.gameObject, trail.time);
+            yield return null;
+        }
+
         Instantiate(_particleEffectOnhit, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(trail.gameObject, trail.time);
     }
-
 }

@@ -2580,7 +2580,7 @@ GameObject:
   - component: {fileID: 742840843}
   - component: {fileID: 742840841}
   m_Layer: 0
-  m_Name: ResetWorld
+  m_Name: CorridorMaanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3671,7 +3671,7 @@ MonoBehaviour:
   mvmSpeed: 5
   jumpForce: 7
   gravityMultiplier: 2
-  CorridorManager: {fileID: 0}
+  CorridorManager: {fileID: 742840841}
   _anim: {fileID: 800385840}
 --- !u!1001 &826306461
 PrefabInstance:
@@ -4868,7 +4868,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141010955}
-  m_LocalRotation: {x: -0.4159281, y: 0.5155514, z: 0.5001738, w: 0.5577068}
+  m_LocalRotation: {x: -0.44939557, y: 0.54671973, z: 0.4735464, w: 0.52430433}
   m_LocalPosition: {x: 0.05, y: 0.163, z: 0.049}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -4876,7 +4876,7 @@ Transform:
   - {fileID: 1406213155}
   m_Father: {fileID: 521373534}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -78.425, y: 52.402, z: 40.022}
+  m_LocalEulerAnglesHint: {x: -81.507, y: 90.666, z: 2.009}
 --- !u!23 &1141010957
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5915,9 +5915,9 @@ MonoBehaviour:
   _particleEffectOnhit: {fileID: 4179197960026752406, guid: 9c5ed522712aa6b478c567456a2b1c2f,
     type: 3}
   _trail: {fileID: 2262288383947619067, guid: c5c0ee86b20293d488b70495cfc765ba, type: 3}
-  _weapon: {fileID: 0}
-  _cc: {fileID: 0}
-  _rig: {fileID: 0}
+  _weapon: {fileID: 11400000, guid: 671fd827902a2c34fadae285e3ebe504, type: 2}
+  _cc: {fileID: 800385840}
+  _rig: {fileID: 2117535556}
 --- !u!1 &1887071207
 GameObject:
   m_ObjectHideFlags: 0

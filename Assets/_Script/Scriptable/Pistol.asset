@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71d9469e374233442a0f9ebab0b4ad15, type: 3}
-  m_Name: Ak
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  weaponName: Ak47
-  <fireRate>k__BackingField: 0.3
-  trailRenderer: {fileID: 2262288383947619067, guid: a29f3cd2ca3f7e34d9cff43549d06016,
+  weaponName: Pistol
+  <fireRate>k__BackingField: 0.6
+  trailRenderer: {fileID: 2262288383947619067, guid: c5c0ee86b20293d488b70495cfc765ba,
     type: 3}
-  bulletDMG: 1
-  Xspray: 0.4
-  Yspray: 0.4
+  bulletDMG: 0.5
+  Xspray: 0.1
+  Yspray: 0.1
