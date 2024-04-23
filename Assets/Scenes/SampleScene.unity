@@ -4944,8 +4944,7 @@ MonoBehaviour:
   _particleEffectOnhit: {fileID: 4179197960026752406, guid: 9c5ed522712aa6b478c567456a2b1c2f,
     type: 3}
   _trail: {fileID: 2262288383947619067, guid: a29f3cd2ca3f7e34d9cff43549d06016, type: 3}
-  bulletDMG: 0
-  fireRate: 0.3
+  _weapon: {fileID: 11400000, guid: d2262a1c966f5c14d98b41facaae3870, type: 2}
   _cc: {fileID: 521373598}
   _rig: {fileID: 981153798}
 --- !u!1001 &1166978842
@@ -5916,8 +5915,7 @@ MonoBehaviour:
   _particleEffectOnhit: {fileID: 4179197960026752406, guid: 9c5ed522712aa6b478c567456a2b1c2f,
     type: 3}
   _trail: {fileID: 2262288383947619067, guid: c5c0ee86b20293d488b70495cfc765ba, type: 3}
-  bulletDMG: 0
-  fireRate: 1
+  _weapon: {fileID: 0}
   _cc: {fileID: 0}
   _rig: {fileID: 0}
 --- !u!1 &1887071207

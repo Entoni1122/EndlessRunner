@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ak
   m_EditorClassIdentifier: 
   weaponName: Ak47
-  fireRate: 0.2
+  <fireRate>k__BackingField: 0.3
   trailRenderer: {fileID: 2262288383947619067, guid: a29f3cd2ca3f7e34d9cff43549d06016,
     type: 3}
   bulletDMG: 1

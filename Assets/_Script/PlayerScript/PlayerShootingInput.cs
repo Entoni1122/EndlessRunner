@@ -57,11 +57,11 @@ public class PlayerShootingInput : MonoBehaviour
                 {
                     if (raycastHit.transform.gameObject.GetComponent<EnemyMVM>())
                     {
-                        raycastHit.transform.gameObject.GetComponent<EnemyMVM>().OnDMGTaken(bulletDMG);
+                        raycastHit.transform.gameObject.GetComponent<EnemyMVM>().OnDMGTaken(_weapon.BulletDMG);
                     }
                     TrailRenderer trail = Instantiate(_trail, _muzzle.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, raycastHit));
-                    timer = fireRate;
+                    timer = _weapon.FireRate;
                 }
             }
         }

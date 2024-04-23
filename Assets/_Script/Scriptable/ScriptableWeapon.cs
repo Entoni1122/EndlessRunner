@@ -4,9 +4,22 @@ using UnityEngine;
 public class ScriptableWeapon : ScriptableObject
 {
     [field: SerializeField] string weaponName;
+
     [field: SerializeField] float fireRate { get; set; }
-    [field: SerializeField] TrailRenderer trailRenderer;
+    public float FireRate
+    {
+        get { return fireRate; }
+        set { fireRate = FireRate; }
+    }
+
+    [field: SerializeField]
+    TrailRenderer trailRenderer;
     [field: SerializeField] float bulletDMG;
+    public float BulletDMG
+    {
+        get { return bulletDMG; }
+        set { bulletDMG = BulletDMG; }
+    }
 
 
     [field: SerializeField] float Xspray;
