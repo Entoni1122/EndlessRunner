@@ -10,12 +10,16 @@ public class PlayerMVM : MonoBehaviour
     [SerializeField] float mvmSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float gravityMultiplier = 1;
-    [SerializeField]private Vector3 Velocity;
-
     float gravity = -9.81f;
-    CharacterController _cc;
-    public Animator _anim;
+    
+    Vector3 Velocity;
     Vector3 direction;
+
+    [SerializeField] CorridorManager CorridorManager;
+
+    CharacterController _cc;
+    [SerializeField] Animator _anim;
+
     [SerializeField]public bool jump => _anim.GetBool("Jump");
     private void Awake()
     {
@@ -24,6 +28,11 @@ public class PlayerMVM : MonoBehaviour
     void Update()
     {
         PlayerMove();
+        if (transform.position.z > 50)
+        {
+            transform.position = Vector3.zero;
+            CorridorManager.ResetCoordinateToZero();
+        }
     }
 
     private void PlayerMove()
@@ -40,7 +49,6 @@ public class PlayerMVM : MonoBehaviour
         {
             x = 0;
         }
-        direction.z = 1;
         direction.x = x;
 
         _anim.SetFloat("Blend",x);

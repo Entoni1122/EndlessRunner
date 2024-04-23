@@ -12,10 +12,7 @@ public class PlayerShootingInput : MonoBehaviour
     [SerializeField] GameObject aimTarget;
     [SerializeField] GameObject _particleEffectOnhit;
     [SerializeField] TrailRenderer _trail;
-
-    public float bulletDMG;
-
-    public float fireRate;
+    [SerializeField] ScriptableWeapon _weapon;
     float timer;
 
     [SerializeField] Animator _cc;
