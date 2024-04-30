@@ -1,6 +1,7 @@
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
+using Unity.Burst;
 using UnityEngine;
 using System;
 
@@ -8,7 +9,7 @@ public partial struct EnemySpawnerSystem : ISystem
 {
     public void OnCreate(ref SystemState state) { }
     public void OnDestroy(ref SystemState state) { }
-
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         foreach ((RefRW<LocalTransform> transform, RefRW<EnemySpawner> spawner) in
@@ -17,13 +18,14 @@ public partial struct EnemySpawnerSystem : ISystem
             spawner.ValueRW.Timer -= SystemAPI.Time.DeltaTime;
             if (spawner.ValueRW.Timer <= 0)
             {
-                float randomPosition = UnityEngine.Random.Range(spawner.ValueRO.SpawningOffSetMin, spawner.ValueRO.SpawningOffSetMax);
+                float randomPositionX = UnityEngine.Random.Range(spawner.ValueRO.SpawningOffSetMinX, spawner.ValueRO.SpawningOffSetMaxX);
+                float randomPositionY = UnityEngine.Random.Range(spawner.ValueRO.SpawningOffSetMinY, spawner.ValueRO.SpawningOffSetMaxY);
                 Entity enemy = state.EntityManager.Instantiate(spawner.ValueRO.EnemyPrefabs);
                 state.EntityManager.SetComponentData(enemy, new LocalTransform
                 {
-                    Position = new float3(randomPosition, transform.ValueRO.Position.y, transform.ValueRO.Position.z),
+                    Position = new float3(randomPositionX, randomPositionY + transform.ValueRO.Position.y, transform.ValueRO.Position.z),
                     Rotation = quaternion.identity,
-                    Scale = UnityEngine.Random.Range(0.5f, 1)
+                    Scale = UnityEngine.Random.Range(0.3f, 1)
                 });
 
                 spawner.ValueRW.Timer = spawner.ValueRW.SpawnTimer;

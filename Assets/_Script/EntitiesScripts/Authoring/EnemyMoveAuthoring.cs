@@ -6,6 +6,7 @@ using Unity.Entities;
 public class EnemyMoveAuthoring : MonoBehaviour
 {
     public float Value;
+    public float SinValue;
 
     public class Baker : Baker<EnemyMoveAuthoring>
     {
@@ -14,7 +15,8 @@ public class EnemyMoveAuthoring : MonoBehaviour
             var entir = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entir, new EnemyMove()
             {
-                Value = authoring.Value
+                Value = authoring.Value,
+                SinValue = authoring.SinValue
             });
         }
     }
@@ -23,4 +25,6 @@ public class EnemyMoveAuthoring : MonoBehaviour
 public struct EnemyMove : IComponentData
 {
     public float Value;
+    public float SinValue;
+
 }

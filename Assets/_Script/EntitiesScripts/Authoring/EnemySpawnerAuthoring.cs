@@ -10,6 +10,8 @@ public class EnemySpawnerAuthoring : MonoBehaviour
     public float SpawningOffSetMin;
     public float SpawningOffSetMax;
 
+    public float SpawningOffSetMinY;
+    public float SpawningOffSetMaxY;
 
     public GameObject EnemyPrefabs;
 
@@ -22,8 +24,10 @@ public class EnemySpawnerAuthoring : MonoBehaviour
             {
                 SpawnTimer = authoring.SpawnTimer,
                 Timer = authoring.Timer,
-                SpawningOffSetMax = authoring.SpawningOffSetMax,
-                SpawningOffSetMin = authoring.SpawningOffSetMin,
+                SpawningOffSetMaxX = authoring.SpawningOffSetMax,
+                SpawningOffSetMinX = authoring.SpawningOffSetMin,
+                SpawningOffSetMaxY = authoring.SpawningOffSetMaxY,
+                SpawningOffSetMinY = authoring.SpawningOffSetMinY,
                 EnemyPrefabs = GetEntity(authoring.EnemyPrefabs,TransformUsageFlags.Dynamic)
             }); 
         }
@@ -35,6 +39,8 @@ public struct EnemySpawner : IComponentData
     public float SpawnTimer;
     public Entity EnemyPrefabs;
     public float Timer;
-    public float SpawningOffSetMin;
-    public float SpawningOffSetMax;
+    public float SpawningOffSetMinX;
+    public float SpawningOffSetMaxX;
+    public float SpawningOffSetMinY;
+    public float SpawningOffSetMaxY;
 }
