@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UIElements;
+using Unity.Burst;
 
+[BurstCompile]
 public class PlayerShootingInput : MonoBehaviour
 {
     [SerializeField] Transform _muzzle;
@@ -19,7 +17,8 @@ public class PlayerShootingInput : MonoBehaviour
     [SerializeField] Animator _cc;
     public Rig _rig;
     bool CanShoot = true;
-    // Update is called once per frame
+
+
     void Update()
     {
         ShootInput();
@@ -37,7 +36,6 @@ public class PlayerShootingInput : MonoBehaviour
         _cc.SetBool("Reload", false);
         _rig.weight = 1;
         CanShoot = true;
-        print("Reloading End");
     }
     void ShootInput()
     {
@@ -50,22 +48,25 @@ public class PlayerShootingInput : MonoBehaviour
             {
                 return;
             }
-            timer -= Time.deltaTime;
-            aimTarget.transform.position = raycastHit.point;
-            raycastHit.point += _weapon.SprayShootPoint();
-            if (timer <= 0 && CanShoot)
+            if (CanShoot)
             {
-                if (Input.GetKey(KeyCode.Mouse0))
+                timer -= Time.deltaTime;
+                aimTarget.transform.position = raycastHit.point;
+                raycastHit.point += _weapon.SprayShootPoint();
+                if (timer <= 0 && CanShoot)
                 {
-                    if (raycastHit.transform.gameObject.GetComponent<EnemyMVM>())
+                    if (Input.GetKey(KeyCode.Mouse0))
                     {
-                        raycastHit.transform.gameObject.GetComponent<EnemyMVM>().OnDMGTaken(_weapon.BulletDMG);
-                    }
-                    TrailRenderer trail = Instantiate(_trail, _muzzle.position, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, raycastHit));
-                    timer = _weapon.FireRate;
+                        if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                        {
+                            raycastHit.transform.gameObject.GetComponent<EnemyMVM>().OnDMGTaken(_weapon.BulletDMG);
+                        }
+                        TrailRenderer trail = Instantiate(_trail, _muzzle.position, Quaternion.identity);
+                        StartCoroutine(SpawnTrail(trail, raycastHit));
+                        timer = _weapon.FireRate;
 
-                    _cc.SetTrigger("Shoot");
+                        _cc.SetTrigger("Shoot");
+                    }
                 }
             }
         }

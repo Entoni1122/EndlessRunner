@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.Burst;
 using UnityEngine;
 using System;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public partial struct EnemySpawnerSystem : ISystem
 {
@@ -20,6 +21,7 @@ public partial struct EnemySpawnerSystem : ISystem
             {
                 float randomPositionX = UnityEngine.Random.Range(spawner.ValueRO.SpawningOffSetMinX, spawner.ValueRO.SpawningOffSetMaxX);
                 float randomPositionY = UnityEngine.Random.Range(spawner.ValueRO.SpawningOffSetMinY, spawner.ValueRO.SpawningOffSetMaxY);
+
                 Entity enemy = state.EntityManager.Instantiate(spawner.ValueRO.EnemyPrefabs);
                 state.EntityManager.SetComponentData(enemy, new LocalTransform
                 {

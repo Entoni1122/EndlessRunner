@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Unity.Burst;
 
+[BurstCompile]
 public class EnemySpawnerBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject _enemy;
-    float spawnRate = 1;
+    [SerializeField] float spawnRate = 1;
     float timer;
 
     void Update()
